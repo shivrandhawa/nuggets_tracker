@@ -3,6 +3,7 @@ package com.example.shiv.nugget_tracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -31,14 +32,24 @@ public class MainActivity extends AppCompatActivity {
         final Button eat_1 = (Button) findViewById(R.id.eat_1);
         final Button eat_10 = (Button) findViewById(R.id.eat_10);
         final Button achiev = (Button) findViewById(R.id.to_achiev);
+        final Button continueBtn = (Button) findViewById(R.id.continue_id);
+
 
         Switch s1 = (Switch) findViewById(R.id.switchid);
 
 
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+
+        });
+
         achiev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Achievements.class);
+                Intent i = new Intent(getApplicationContext(), Statistics.class);
 
                 startActivity(i);
             }
@@ -85,6 +96,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void submit(){
+
+        String finalCount;
+        finalCount = count+ "";
+        Intent i = new Intent(this,DataEntry.class);
+        i.putExtra("key",finalCount);
+        startActivity(i);
+
+    }
+
+
+
 
     public void incCountTen() {
         final TextView bigCount = (TextView) findViewById(R.id.eatCount);
@@ -148,5 +172,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+
 
 }
